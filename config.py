@@ -1,7 +1,5 @@
 """
-Configuration loader.
-Auto-inherits API keys from rofy_2_llm/.env so you don't need to set them up again.
-Local .env overrides parent if needed.
+Configuration loader. Loads API keys from local .env file.
 """
 import os
 from pathlib import Path
@@ -10,13 +8,6 @@ from dotenv import load_dotenv
 
 def _load_env():
     root = Path(__file__).parent
-
-    # 1. Load parent project keys (rofy_2_llm/.env) — shared infrastructure
-    parent_env = root.parent.parent / "rofy_2_llm" / ".env"
-    if parent_env.exists():
-        load_dotenv(parent_env)
-
-    # 2. Load local .env — hackathon-specific overrides
     local_env = root / ".env"
     if local_env.exists():
         load_dotenv(local_env, override=True)

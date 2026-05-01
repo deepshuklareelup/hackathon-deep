@@ -13,13 +13,7 @@ dist/
 build/
 
 # Output files (large, generated)
-output/*/audio/
-output/*/video_work/
-output/*/work/
-output/traces/
-output/**/*.mp4
-output/**/*.mp3
-output/**/*.wav
+output/
 logs/*.log
 
 # Node / Next.js

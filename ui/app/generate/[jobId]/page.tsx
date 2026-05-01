@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   streamFullPipeline,
-  reconnectJobStream,
-  getJob,
   videoUrl,
   API_BASE,
   type ReelJob,
@@ -103,172 +101,115 @@ export default function GeneratePage() {
   }, [log]);
 
   useEffect(() => {
-    let esCleanup: (() => void) | undefined;
+    const cleanup = streamFullPipeline(
+      jobId,
+      (evt: SSEEvent) => {
+        const stage = evt.stage ?? "";
+        const msg = evt.message ?? "";
 
-    function startFreshPipeline() {
-      addLog({
-        type: "info",
-        text: `Starting production pipeline for job ${jobId}…`,
-      });
-      esCleanup = streamFullPipeline(
-        jobId,
-        (evt: SSEEvent) => {
-          const stage = evt.stage ?? "";
-          const msg = evt.message ?? "";
-
-          // Update stage tracker
-          if (stage && STAGE_META[stage]) {
-            setStages((prev) => {
-              const next = { ...prev };
-              let passed = false;
-              for (const key of Object.keys(STAGE_META)) {
-                if (key === stage) {
-                  passed = true;
-                  next[key] = { status: "active", message: msg };
-                } else if (!passed && next[key].status !== "done") {
-                  next[key] = { status: "done", message: next[key].message };
-                }
-              }
-              return next;
-            });
-            addLog({
-              type: "stage",
-              text: `[${STAGE_META[stage].label}] ${msg}`,
-            });
-          } else if (msg) {
-            addLog({ type: "info", text: msg });
-          }
-
-          // Surface any error field from SSE payload
-          if (evt.error) {
-            addLog({ type: "error", text: `Error: ${evt.error}` });
-            setStages((prev) => {
-              const next = { ...prev };
-              if (stage && next[stage])
-                next[stage] = { status: "error", message: evt.error! };
-              return next;
-            });
-          }
-
-          // Handle partial image success
-          if (
-            stage === "imaging" &&
-            typeof evt.images_failed === "number" &&
-            evt.images_failed > 0
-          ) {
-            const failed = evt.failed_scene_indices ?? [];
-            const warnMsg = `${evt.images_failed} scene image(s) failed to generate (scenes: ${failed.map((i) => i + 1).join(", ")}). The video will be produced with ${evt.images_ok ?? 0} scenes.`;
-            setWarnings((prev) => [...prev, warnMsg]);
-            addLog({ type: "warn", text: `⚠ ${warnMsg}` });
-            setStages((prev) => ({
-              ...prev,
-              imaging: {
-                status: "warn",
-                message: prev.imaging.message,
-                detail: `${evt.images_ok}/${(evt.images_ok ?? 0) + (evt.images_failed ?? 0)}`,
-              },
-            }));
-          }
-
-          // Capture scene media (images / clips) sent in SSE payload
-          if (evt.scenes && evt.scenes.length > 0) {
-            setSceneMedia((prev) => {
-              const map = new Map(prev.map((s) => [s.index, s]));
-              for (const s of evt.scenes!) {
-                const existing = map.get(s.index) ?? {};
-                const clip = s.clip_url
-                  ? s.clip_url.startsWith("http")
-                    ? s.clip_url
-                    : `${API_BASE}${s.clip_url}`
-                  : undefined;
-                map.set(s.index, {
-                  ...existing,
-                  ...s,
-                  ...(clip ? { clip_url: clip } : {}),
-                });
-              }
-              return Array.from(map.values()).sort((a, b) => a.index - b.index);
-            });
-          }
-
-          // Capture QA report
-          if (evt.qa_report) {
-            setQaReport(evt.qa_report);
-          }
-        },
-        (job: ReelJob) => {
+        // Update stage tracker
+        if (stage && STAGE_META[stage]) {
           setStages((prev) => {
             const next = { ...prev };
-            for (const key of Object.keys(next))
-              next[key] = { status: "done", message: next[key].message };
+            let passed = false;
+            for (const key of Object.keys(STAGE_META)) {
+              if (key === stage) {
+                passed = true;
+                next[key] = { status: "active", message: msg };
+              } else if (!passed && next[key].status !== "done") {
+                next[key] = { status: "done", message: next[key].message };
+              }
+            }
             return next;
           });
-          setDoneJob(job);
           addLog({
-            type: "done",
-            text: `Pipeline complete! Total cost: $${job.total_cost?.toFixed(4) ?? "0.0000"}`,
+            type: "stage",
+            text: `[${STAGE_META[stage].label}] ${msg}`,
           });
-        },
-        (msg: string) => {
-          setFatalError(msg);
-          addLog({ type: "error", text: `Fatal: ${msg}` });
-        },
-        () => {
-          // Script was rewritten — go back to review page to approve the new version
-          router.push(`/review/${jobId}`);
-        },
-      );
-    }
+        } else if (msg) {
+          addLog({ type: "info", text: msg });
+        }
 
-    // Check if this job already exists on the server (page refresh scenario)
-    getJob(jobId)
-      .then((existingJob) => {
-        addLog({
-          type: "info",
-          text: `Reconnecting to existing job (status: ${existingJob.status})…`,
-        });
-        esCleanup = reconnectJobStream(
-          jobId,
-          (stage, _action, message) => {
-            if (stage && STAGE_META[stage]) {
-              setStages((prev) => {
-                const next = { ...prev };
-                next[stage] = { status: "active", message };
-                return next;
+        // Surface any error field from SSE payload
+        if (evt.error) {
+          addLog({ type: "error", text: `Error: ${evt.error}` });
+          setStages((prev) => {
+            const next = { ...prev };
+            if (stage && next[stage])
+              next[stage] = { status: "error", message: evt.error! };
+            return next;
+          });
+        }
+
+        // Handle partial image success
+        if (
+          stage === "imaging" &&
+          typeof evt.images_failed === "number" &&
+          evt.images_failed > 0
+        ) {
+          const failed = evt.failed_scene_indices ?? [];
+          const warnMsg = `${evt.images_failed} scene image(s) failed to generate (scenes: ${failed.map((i) => i + 1).join(", ")}). The video will be produced with ${evt.images_ok ?? 0} scenes.`;
+          setWarnings((prev) => [...prev, warnMsg]);
+          addLog({ type: "warn", text: `⚠ ${warnMsg}` });
+          setStages((prev) => ({
+            ...prev,
+            imaging: {
+              status: "warn",
+              message: prev.imaging.message,
+              detail: `${evt.images_ok}/${(evt.images_ok ?? 0) + (evt.images_failed ?? 0)}`,
+            },
+          }));
+        }
+
+        // Capture scene media (images / clips) sent in SSE payload
+        if (evt.scenes && evt.scenes.length > 0) {
+          setSceneMedia((prev) => {
+            const map = new Map(prev.map((s) => [s.index, s]));
+            for (const s of evt.scenes!) {
+              const existing = map.get(s.index) ?? {};
+              const clip = s.clip_url
+                ? s.clip_url.startsWith("http")
+                  ? s.clip_url
+                  : `${API_BASE}${s.clip_url}`
+                : undefined;
+              map.set(s.index, {
+                ...existing,
+                ...s,
+                ...(clip ? { clip_url: clip } : {}),
               });
-              addLog({
-                type: "stage",
-                text: `[${STAGE_META[stage]?.label ?? stage}] ${message}`,
-              });
-            } else {
-              addLog({ type: "info", text: message });
             }
-          },
-          (job: ReelJob) => {
-            setStages((prev) => {
-              const next = { ...prev };
-              for (const key of Object.keys(next))
-                next[key] = { status: "done", message: next[key].message };
-              return next;
-            });
-            setDoneJob(job);
-            addLog({
-              type: "done",
-              text: `Pipeline complete! Total cost: $${job.total_cost?.toFixed(4) ?? "0.0000"}`,
-            });
-          },
-          (msg: string) => {
-            setFatalError(msg);
-            addLog({ type: "error", text: `Fatal: ${msg}` });
-          },
-        );
-      })
-      .catch(() => {
-        // Job not found on server — start fresh pipeline
-        startFreshPipeline();
-      });
+            return Array.from(map.values()).sort((a, b) => a.index - b.index);
+          });
+        }
 
-    return () => esCleanup?.();
+        // Capture QA report
+        if (evt.qa_report) {
+          setQaReport(evt.qa_report);
+        }
+      },
+      (job: ReelJob) => {
+        setStages((prev) => {
+          const next = { ...prev };
+          for (const key of Object.keys(next))
+            next[key] = { status: "done", message: next[key].message };
+          return next;
+        });
+        setDoneJob(job);
+        addLog({
+          type: "done",
+          text: `Pipeline complete! Total cost: $${job.total_cost?.toFixed(4) ?? "0.0000"}`,
+        });
+      },
+      (msg: string) => {
+        setFatalError(msg);
+        addLog({ type: "error", text: `Fatal: ${msg}` });
+      },
+      () => {
+        // Script was rewritten — go back to review page to approve the new version
+        router.push(`/review/${jobId}`);
+      },
+    );
+    return () => cleanup?.();
   }, [jobId]);
 
   const stageKeys = Object.keys(STAGE_META);
