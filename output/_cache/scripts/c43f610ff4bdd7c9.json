@@ -1,0 +1,49 @@
+{
+  "hook": "Your runs are about to get 85% faster.",
+  "scenes": [
+    {
+      "index": 0,
+      "narration": "Meet the AeroFoam Pro Runner. Carbon-fibre plated speed machine.",
+      "visual_direction": "Close-up hero shot of the shoe rotating slowly on white background",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner ultralight running shoe, sleek carbon-fibre design, floating on pure white background, studio lighting with dramatic side rim light, professional product photography, photorealistic, 8k detail, modern athletic aesthetic"
+    },
+    {
+      "index": 1,
+      "narration": "Only 165 grams. You'll forget you're wearing them.",
+      "visual_direction": "Hand holding shoe effortlessly with one finger, showing how light it is",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner balanced on single finger, athletic hand holding ultralight shoe, bright natural window lighting, clean minimal background, photorealistic studio shot, emphasizing weightlessness, sharp focus on shoe"
+    },
+    {
+      "index": 2,
+      "narration": "85% energy return with every stride.",
+      "visual_direction": "Runner's feet hitting pavement in slow motion, foam compressing and rebounding",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner on runner's foot striking asphalt road, dynamic motion blur, golden hour lighting, low angle ground perspective, responsive foam midsole compressing, photorealistic action photography, energy and movement"
+    },
+    {
+      "index": 3,
+      "narration": "Carbon-fibre plate propels you forward like rocket fuel.",
+      "visual_direction": "X-ray or cutaway view showing the carbon plate technology inside",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner transparent cutaway view showing internal carbon-fibre plate, dramatic backlighting highlighting the plate structure, high-tech product photography, photorealistic 3D render style, sleek and technical"
+    },
+    {
+      "index": 4,
+      "narration": "Speed work or marathon training. Does both.",
+      "visual_direction": "Runner accelerating on track wearing the shoes, powerful stride",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner on athletic track, runner in explosive sprint position, vibrant energetic lighting, photorealistic sports photography, motion and determination, dynamic low angle perspective"
+    },
+    {
+      "index": 5,
+      "narration": "5-year warranty. 139 dollars. Zero excuses.",
+      "visual_direction": "Final hero shot of shoe with price overlay, warranty badge visible",
+      "duration_seconds": 6,
+      "image_prompt": "AeroFoam Pro Runner hero shot, dramatic spotlight from above, premium product photography on gradient background, warranty badge visible, photorealistic rendering, bold energetic lighting, professional commercial style, $139 price point elegance"
+    }
+  ],
+  "cta": "Link in bio. Your PR is waiting.",
+  "total_duration": 36
+}

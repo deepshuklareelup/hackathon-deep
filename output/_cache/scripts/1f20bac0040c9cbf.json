@@ -1,0 +1,28 @@
+{
+  "hook": "Lipstick that survives everything? We tested it.",
+  "scenes": [
+    {
+      "index": 0,
+      "narration": "Twelve hours. Coffee, meals, meetings. Still flawless.",
+      "visual_direction": "Close-up of lips wearing bold red ChromaLux lipstick, woman drinking coffee confidently",
+      "duration_seconds": 5,
+      "image_prompt": "Woman wearing ChromaLux Pro Liquid Lipstick in bold red on perfect lips, drinking coffee confidently, extreme close-up macro shot, golden hour lighting, luxury beauty photography, high-end cosmetics editorial style, flawless matte finish, studio lighting with soft rim light"
+    },
+    {
+      "index": 1,
+      "narration": "Matte or satin. Twelve curated shades for every mood.",
+      "visual_direction": "Array of all 12 ChromaLux lipstick tubes fanned out on marble surface with swatches",
+      "duration_seconds": 5,
+      "image_prompt": "ChromaLux Pro Liquid Lipstick Collection, 12 luxurious tubes arranged artistically on white marble surface, lip color swatches displayed, dramatic overhead shot, soft diffused professional lighting, high-end beauty product photography, rose gold accents, ultra-sharp focus, elegant composition"
+    },
+    {
+      "index": 2,
+      "narration": "Waterproof. Cruelty-free. Absolutely luxurious.",
+      "visual_direction": "Model applying ChromaLux lipstick, looking confident in mirror, luxury bathroom setting",
+      "duration_seconds": 5,
+      "image_prompt": "Elegant woman applying ChromaLux Pro Liquid Lipstick in front of luxury mirror, close-up of ChromaLux application wand with rich pigment, warm golden lighting, sophisticated beauty ritual, high-end cosmetics photography style, bokeh background, creamy texture visible, professional makeup application"
+    }
+  ],
+  "cta": "Elevate your look. Link in bio to shop ChromaLux.",
+  "total_duration": 15
+}

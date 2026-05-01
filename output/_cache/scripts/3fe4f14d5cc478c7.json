@@ -1,0 +1,42 @@
+{
+  "hook": "Healthy meals in half the time? Yes, really.",
+  "scenes": [
+    {
+      "index": 0,
+      "narration": "Tired of spending hours cooking dinner every single night?",
+      "visual_direction": "Exhausted parent staring at clock in messy kitchen at 6pm",
+      "duration_seconds": 5,
+      "image_prompt": "Photorealistic image of tired woman in modern kitchen at 6pm, CrispMaster 6L Air Fryer visible on countertop in background, clock showing dinner time, messy countertop, warm indoor lighting, shallow depth of field, lifestyle photography style, 576x1024 vertical composition"
+    },
+    {
+      "index": 1,
+      "narration": "CrispMaster cooks crispy chicken wings in just twelve minutes flat.",
+      "visual_direction": "Golden crispy wings being pulled from air fryer basket",
+      "duration_seconds": 5,
+      "image_prompt": "Photorealistic close-up of CrispMaster 6L Air Fryer with basket pulled out revealing perfectly golden crispy chicken wings, steam rising, bright kitchen lighting, dramatic product photography, black modern air fryer, 576x1024 vertical format"
+    },
+    {
+      "index": 2,
+      "narration": "Twelve preset modes means anyone in the family can cook.",
+      "visual_direction": "Hand tapping app on phone, selecting preset mode",
+      "duration_seconds": 5,
+      "image_prompt": "Photorealistic overhead shot of smartphone displaying CrispMaster app with 12 preset cooking mode icons visible, finger tapping screen, CrispMaster 6L Air Fryer visible in background on kitchen counter, energetic bright lighting, modern tech photography, 576x1024 vertical orientation"
+    },
+    {
+      "index": 3,
+      "narration": "Six liter capacity feeds the whole family in one go.",
+      "visual_direction": "Family of four gathering around dinner table with air-fried meal",
+      "duration_seconds": 5,
+      "image_prompt": "Photorealistic wide shot of happy family of four at dinner table, CrispMaster 6L Air Fryer on counter in background, plates of healthy air-fried vegetables and proteins on table, warm golden hour lighting, lifestyle product photography, 576x1024 vertical composition"
+    },
+    {
+      "index": 4,
+      "narration": "Dishwasher safe basket means cleanup takes thirty seconds, not thirty minutes.",
+      "visual_direction": "Basket being tossed into dishwasher effortlessly",
+      "duration_seconds": 5,
+      "image_prompt": "Photorealistic action shot of hands placing CrispMaster 6L Air Fryer basket into open dishwasher, clean modern kitchen, bright energetic lighting, motion blur on hands showing speed, product photography style, sleek black basket, 576x1024 vertical format"
+    }
+  ],
+  "cta": "Link in bio! Get yours for just $89.99 today!",
+  "total_duration": 25
+}

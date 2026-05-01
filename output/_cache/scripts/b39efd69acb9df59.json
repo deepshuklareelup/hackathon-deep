@@ -1,0 +1,49 @@
+{
+  "hook": "Your old shoes are slowing you down.",
+  "scenes": [
+    {
+      "index": 0,
+      "narration": "Meet the shoe that keeps up with your hustle.",
+      "visual_direction": "Close-up hero shot of lime green running shoes on white background, product showcase",
+      "duration_seconds": 5,
+      "image_prompt": "Professional product photography of Men's Lime Green Running Shoes on pure white background, studio lighting with bright highlights, centered composition, vibrant colors, commercial advertising style, crisp focus, high detail"
+    },
+    {
+      "index": 1,
+      "narration": "Lightweight mesh keeps you cool mile after mile.",
+      "visual_direction": "Extreme close-up of breathable mesh material, showing texture and ventilation",
+      "duration_seconds": 5,
+      "image_prompt": "Macro photograph of breathable mesh fabric on Men's Lime Green Running Shoes, dramatic side lighting showing texture and ventilation holes, shallow depth of field, energetic commercial photography style, crisp detail"
+    },
+    {
+      "index": 2,
+      "narration": "Cushioned midsole absorbs every impact, protects every step.",
+      "visual_direction": "Side profile of shoe with focus on cushioned midsole technology",
+      "duration_seconds": 5,
+      "image_prompt": "Side view product shot of Men's Lime Green Running Shoes highlighting white cushioned midsole, dynamic studio lighting, dark gradient background, professional athletic footwear photography, sharp focus on midsole cushioning technology"
+    },
+    {
+      "index": 3,
+      "narration": "Durable grip that handles any surface with confidence.",
+      "visual_direction": "Bottom view showing rubber outsole traction pattern",
+      "duration_seconds": 5,
+      "image_prompt": "Bottom view of Men's Lime Green Running Shoes showing black rubber outsole with deep traction pattern, overhead studio lighting, dramatic shadows, commercial product photography, high contrast, professional athletic gear style"
+    },
+    {
+      "index": 4,
+      "narration": "Bold style that makes you impossible to ignore.",
+      "visual_direction": "Dynamic action shot of someone wearing the shoes mid-stride",
+      "duration_seconds": 5,
+      "image_prompt": "Dynamic action photograph of athletic male wearing Men's Lime Green Running Shoes mid-stride on urban pavement, motion blur on background, golden hour lighting, energetic sports photography style, vibrant colors, professional fitness campaign aesthetic"
+    },
+    {
+      "index": 5,
+      "narration": "Performance built. Style delivered. Get yours now.",
+      "visual_direction": "Final product showcase with price and brand positioning",
+      "duration_seconds": 5,
+      "image_prompt": "Hero shot of Men's Lime Green Running Shoes at 45-degree angle on minimalist white surface, soft studio lighting with subtle shadows, clean modern product photography, commercial advertising style, vibrant lime green pops against neutral background"
+    }
+  ],
+  "cta": "Link in bio. Run bold.",
+  "total_duration": 30
+}

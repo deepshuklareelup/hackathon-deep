@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Output files (large, generated)
+output/*/audio/
+output/*/video_work/
+output/*/work/
+output/traces/
+logs/*.log
+
+# Node / Next.js
+ui/node_modules/
+ui/.next/
+ui/.env.local
+
+# OS
+.DS_Store
+Thumbs.db

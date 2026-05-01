@@ -1,0 +1,15 @@
+{
+  "name": "AquaFlow Water Bottle",
+  "description": "A smart insulated water bottle that tracks your hydration and glows when it's time to drink.",
+  "price": "$49.99",
+  "features": [
+    "24-hour temperature retention",
+    "Built-in hydration reminder LED ring",
+    "BPA-free stainless steel",
+    "Connects to iOS & Android app",
+    "Dishwasher safe"
+  ],
+  "target_audience": "Health-conscious millennials and gym-goers",
+  "tone": "exciting",
+  "platform": "instagram"
+}
