@@ -17,6 +17,9 @@ output/*/audio/
 output/*/video_work/
 output/*/work/
 output/traces/
+output/**/*.mp4
+output/**/*.mp3
+output/**/*.wav
 logs/*.log
 
 # Node / Next.js
